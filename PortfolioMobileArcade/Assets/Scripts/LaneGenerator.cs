@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Random = Unity.Mathematics.Random;
 
 public class LaneGenerator : MonoBehaviour
 {
@@ -13,12 +11,13 @@ public class LaneGenerator : MonoBehaviour
     [SerializeField] private int maxLanes = 10;
 
     private List<GameObject> currentLanes = new List<GameObject>() ;
+    
     // Start is called before the first frame update
     void Start()
     {
         currentPos = transform.position;
-        
-        for (int i = 0; i < maxLanes; i++)
+
+        while (currentLanes.Count < maxLanes)
         {
             GenerateLane();
         }
@@ -39,7 +38,7 @@ public class LaneGenerator : MonoBehaviour
     private void GenerateLane()
     {
         int randLane = UnityEngine.Random.Range(0, laneDatas.Count);
-        int randQuant = UnityEngine.Random.Range(0, laneDatas[randLane].maxInChain);
+        int randQuant = UnityEngine.Random.Range(1, laneDatas[randLane].maxInChain);
 
         for (int i = 0; i < randQuant; i++)
         {
@@ -52,8 +51,6 @@ public class LaneGenerator : MonoBehaviour
                 Destroy(currentLanes[0]);
                 currentLanes.RemoveAt(0);
             }
-            print(currentLanes.Count);
-
         }
     }
 }
