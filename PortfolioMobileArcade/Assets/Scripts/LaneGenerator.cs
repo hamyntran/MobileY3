@@ -44,7 +44,7 @@ public class LaneGenerator : MonoBehaviour
         {
             GameObject newLane = Instantiate(laneDatas[randLane].prefab, currentPos, quaternion.identity);
             currentLanes.Add(newLane);
-            currentPos.x += laneWidth;
+            currentPos.z += laneWidth;
             
             if (currentLanes.Count > maxLanes)
             {
