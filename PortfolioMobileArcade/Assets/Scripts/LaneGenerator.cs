@@ -4,38 +4,53 @@ using UnityEngine;
 
 public class LaneGenerator : MonoBehaviour
 {
+    public static LaneGenerator Instance;
+    
     [SerializeField] private List<LaneDatas> laneDatas;
-    private Vector3 currentPos;
     [SerializeField] private int laneWidth = 1;
-
     [SerializeField] private int maxLanes = 10;
 
     private List<GameObject> currentLanes = new List<GameObject>() ;
+    private Vector3 currentPos;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+        
+        DontDestroyOnLoad(this);
+    }
+
     
     // Start is called before the first frame update
     void Start()
     {
         currentPos = transform.position;
 
-        while (currentLanes.Count < maxLanes)
+        for (int i = 0; i < maxLanes; i++)
         {
-            GenerateLane();
+            GenerateLane(true);
         }
+
+        maxLanes = currentLanes.Count;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            GenerateLane();
-        }
+        
     }
 
     /// <summary>
     /// Later Inprovement: Object Pooling
     /// </summary>
-    private void GenerateLane()
+    public void GenerateLane(bool start)
     {
         int randLane = UnityEngine.Random.Range(0, laneDatas.Count);
         int randQuant = UnityEngine.Random.Range(1, laneDatas[randLane].maxInChain);
@@ -45,7 +60,10 @@ public class LaneGenerator : MonoBehaviour
             GameObject newLane = Instantiate(laneDatas[randLane].prefab, currentPos, quaternion.identity);
             currentLanes.Add(newLane);
             currentPos.z += laneWidth;
-            
+        }
+        
+        if (!start)
+        {
             if (currentLanes.Count > maxLanes)
             {
                 Destroy(currentLanes[0]);

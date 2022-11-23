@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRG = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
+
+        transform.eulerAngles = new Vector3();
     }
 
     // Update is called once per frame
@@ -51,16 +53,25 @@ public class PlayerMovement : MonoBehaviour
             {
                 round = Mathf.Round(transform.position.x) - transform.position.x;
             }
+            
+            transform.eulerAngles = new Vector3(0, 0, 0);
+
+            
             MovePlayer(new Vector3(round,0,gap));
+            
+            LaneGenerator.Instance.GenerateLane(false);
         }
         
         if (inputBackward)
         {
+            
             float round = 0;
             if (transform.position.x % 1 != 0)
             {
                 round = Mathf.Round(transform.position.x) - transform.position.x;
             }
+            transform.eulerAngles = new Vector3(0, 180, 0);
+
             MovePlayer(new Vector3(round,0,-gap));
         }
         
@@ -71,6 +82,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 round = Mathf.Round(transform.position.x) - transform.position.x;
             }
+            transform.eulerAngles = new Vector3(0, -90, 0);
+            
             MovePlayer(new Vector3(-gap,0,round));
         }
         
@@ -78,10 +91,12 @@ public class PlayerMovement : MonoBehaviour
         {
             float round = 0;
             if (transform.position.z % 1 != 0)
-            {
+            {   
                 round = Mathf.Round(transform.position.x) - transform.position.x;
-            }
+            } 
+            transform.eulerAngles = new Vector3(0, 90, 0);
             MovePlayer(new Vector3(gap,0,round));
+
         }
     }
 
@@ -96,6 +111,5 @@ public class PlayerMovement : MonoBehaviour
     private void FinishHopping()
     {
         hopping = false;
-
     }
 }

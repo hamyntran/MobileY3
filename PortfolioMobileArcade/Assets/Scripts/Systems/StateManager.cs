@@ -23,7 +23,7 @@ public class StateManager : MonoBehaviour
         currentState = state;
     }
 
-    public StateMachine(State _currentState)
+    public StateManager(State _currentState)
     {
         this.currentState = _currentState;
         currentState.EnterState(this);
