@@ -1,25 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Framework.Singleton;
 
-public class CoolDownManager : MonoBehaviour
+namespace Framework.CoolDown
 {
-     public static CoolDownManager Instance;
+    public class CoolDownManager : Singleton<CoolDownManager>
+{
     public List<CoolData> currentCooldownData = new List<CoolData>();
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-        
-        DontDestroyOnLoad(this);
-    }
 
     public void PutOnCooldown(IHasCoolDown cooldown, string purpose, GameObject obj)
     {
@@ -38,7 +25,7 @@ public class CoolDownManager : MonoBehaviour
                 return i;
             }
         }
-         return -1;
+        return -1;
     }
 
     public bool IsOnCooldown(IHasCoolDown cooldown,string purpose, GameObject obj)
@@ -90,7 +77,7 @@ public class CoolDownManager : MonoBehaviour
 public class CoolData
 {
     public float remainTime;
-    public string id;
+    public readonly string id;
 
     public CoolData(IHasCoolDown cooldown, int index)
     {
@@ -110,4 +97,6 @@ public class CoolData
 
         return false;
     }
+}
+   
 }

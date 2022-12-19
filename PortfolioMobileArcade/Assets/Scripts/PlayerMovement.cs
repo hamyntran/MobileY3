@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -40,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         inputBackward = Input.GetKeyDown(KeyCode.S);
         inputLeft = Input.GetKeyDown(KeyCode.A);
         inputRight = Input.GetKeyDown(KeyCode.D);
+
     }
 
     private void Movement()
