@@ -10,6 +10,7 @@ Last modified by: NAME
 /// <summary>
 /// 
 /// </summary>
+
 public class #SCRIPTNAME# : MonoBehaviour
  {
     #region Variables
@@ -17,22 +18,29 @@ public class #SCRIPTNAME# : MonoBehaviour
     #endregion
     
     #region Properties
-    private void Start()
-	{
-	#NOTRIM#
-	}
-	
-	private void Update()
+    #NOTRIM#
+    #endregion
+    
+    #region Constructor
+    public #SCRIPTNAME#()
     {
     #NOTRIM#
     }
     #endregion
     
     #region Unity Callbacks
+    private void Start()
+    {
     #NOTRIM#
+    }
+    	
+    private void Update()
+    {
+    #NOTRIM#
+    }
     #endregion
     
-     #region Methods
-     #NOTRIM#
-     #endregion
+    #region Methods
+    #NOTRIM#
+    #endregion
 }

@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/*------------------------------------------
+Author: NAME
+Last modified by: NAME
+-------------------------------------------*/
+ 
+/// <summary>
+/// 
+/// </summary>
+
+[CreateAssetMenu(fileName = "#SCRIPTNAME#", menuName = "#SCRIPTNAME#")]
+public class #SCRIPTNAME# : ScriptableObject
+ {
+    #region Variables
+    #NOTRIM#
+    #endregion
+    
+    #region Properties
+    #endregion
+    
+    #region Unity Callbacks
+    private void Start()
+    {
+    }
+    	
+    private void Update()
+    {
+    }
+    #endregion
+    
+    #region Methods
+    #NOTRIM#
+    #endregion
+}

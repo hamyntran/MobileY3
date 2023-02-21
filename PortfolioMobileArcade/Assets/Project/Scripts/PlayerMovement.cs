@@ -1,28 +1,36 @@
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private int gap = 1;
+    /*----------Movement setting---------*/
+    [FormerlySerializedAs("_jumpForce")]
+    [Header("Movement setting")]
+    [FormerlySerializedAs("_moveSpeed")] [SerializeField] private float moveSpeed = .5f;
+    [FormerlySerializedAs("_rotateSpeed")] [SerializeField] private float rotateSpeed = .5f;
+    [SerializeField] private float jumpHeight = 3;
+    
+    /*----------References---------*/
+    private PlayerBehaviour _playerBehaviourScr;
+    [SerializeField] Transform _playerHolder;
+    private Vector3 _onGroundPosition = new Vector3();
+    /*----------Private variables---------*/
+    private bool _inputForward, _inputBackward, _inputLeft, _inputRight, _attackIput = false;
+    private bool _hopping = false;
+    private Vector3 _nextDir;
+    private int _gap => LaneGenerator.Instance.LaneWidth;
 
-    [SerializeField] private float jumpForce = 100f;
-    [SerializeField] private float moveSpeed = .5f;
-    [SerializeField] private float rotateSpeed = .5f;
-
-    private Rigidbody playerRG;
-
-    private bool inputForward, inputBackward, inputLeft, inputRight = false;
-    private bool hopping = false;
-
-    private Animator _animator;
-
-    public Vector3 nextDir;
+    
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        playerRG = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
-
+        _playerBehaviourScr = GetComponent<PlayerBehaviour>();
         transform.eulerAngles = new Vector3();
+
+        _onGroundPosition = _playerHolder.position;
     }
 
     // Update is called once per frame
@@ -30,22 +38,23 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleInput();
         Movement();
+        Attack();
     }
     
     private void HandleInput()
     {
-        inputForward = Input.GetKeyDown(KeyCode.W);
-        inputBackward = Input.GetKeyDown(KeyCode.S);
-        inputLeft = Input.GetKeyDown(KeyCode.A);
-        inputRight = Input.GetKeyDown(KeyCode.D);
-
+        _inputForward = Input.GetKeyDown(KeyCode.W);
+        _inputBackward = Input.GetKeyDown(KeyCode.S);
+        _inputLeft = Input.GetKeyDown(KeyCode.A);
+        _inputRight = Input.GetKeyDown(KeyCode.D);
+        _attackIput = Input.GetKeyDown(KeyCode.Space);
     }
 
     private void Movement()
     {
-        if(hopping){return;}
+        if(_hopping){return;}
         
-        if (inputForward)
+        if (_inputForward)
         {
             float round = 0;
             if (transform.position.x % 1 != 0)
@@ -56,14 +65,13 @@ public class PlayerMovement : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, 0);
 
             
-            MovePlayer(new Vector3(round,0,gap));
+            MovePlayer(new Vector3(round,0,_gap));
             
             LaneGenerator.Instance.GenerateLane(false);
         }
         
-        if (inputBackward)
+        if (_inputBackward)
         {
-            
             float round = 0;
             if (transform.position.x % 1 != 0)
             {
@@ -71,10 +79,10 @@ public class PlayerMovement : MonoBehaviour
             }
             transform.eulerAngles = new Vector3(0, 180, 0);
 
-            MovePlayer(new Vector3(round,0,-gap));
+            MovePlayer(new Vector3(round,0,-_gap));
         }
         
-        if (inputLeft)
+        if (_inputLeft)
         {
             float round = 0;
             if (transform.position.z % 1 != 0)
@@ -83,10 +91,10 @@ public class PlayerMovement : MonoBehaviour
             }
             transform.eulerAngles = new Vector3(0, -90, 0);
             
-            MovePlayer(new Vector3(-gap,0,round));
+            MovePlayer(new Vector3(-_gap,0,round));
         }
         
-        if (inputRight)
+        if (_inputRight)
         {
             float round = 0;
             if (transform.position.z % 1 != 0)
@@ -94,21 +102,45 @@ public class PlayerMovement : MonoBehaviour
                 round = Mathf.Round(transform.position.x) - transform.position.x;
             } 
             transform.eulerAngles = new Vector3(0, 90, 0);
-            MovePlayer(new Vector3(gap,0,round));
+            MovePlayer(new Vector3(_gap,0,round));
 
+        }
+    }
+
+    private void Attack()
+    {
+        if (_attackIput)
+        {
+            _playerBehaviourScr.TriggerPlayerAnimation(PlayerAnimation.PlayerAttack);
         }
     }
 
     private void MovePlayer(Vector3 difference)
     {
-        _animator.SetTrigger("Move");
-        hopping = true;
+        DOHopAnimation();
+        
+        _playerBehaviourScr.TriggerPlayerAnimation(PlayerAnimation.PlayerJump);
+        
+        _hopping = true;
         
         transform.position += difference;
     }
 
     private void FinishHopping()
     {
-        hopping = false;
+        _hopping = false;
+    }
+
+    private void DOHopAnimation()
+    {
+        var jumpY = _playerHolder.position.y + jumpHeight;
+
+        _playerHolder.DOMoveY(jumpY, moveSpeed).OnComplete(() =>
+        {
+            _playerHolder.DOMoveY(_onGroundPosition.y, moveSpeed).OnComplete(() =>
+            {
+                FinishHopping();
+            });
+        });
     }
 }

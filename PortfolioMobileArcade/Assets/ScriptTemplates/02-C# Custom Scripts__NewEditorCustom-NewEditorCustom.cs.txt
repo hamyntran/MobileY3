@@ -1,0 +1,23 @@
+using UnityEditor;
+using UnityEngine;
+using System.IO;
+using Newtonsoft.Json;
+
+/*------------------------------------------
+Author: NAME
+Last modified by: NAME
+-------------------------------------------*/
+ 
+/// <summary>
+/// 
+/// </summary>
+
+[CustomEditor(typeof(#))]
+public class #SCRIPTNAME# : Editor
+ {
+     public override void OnInspectorGUI()
+     {
+        # _target = (#)target;
+        DrawDefaultInspector();
+     }
+}

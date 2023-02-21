@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+using Newtonsoft.Json;
+
+/*------------------------------------------
+Author: NAME
+Last modified by: NAME
+-------------------------------------------*/
+ 
+/// <summary>
+/// 
+/// </summary>
+
+public class #SCRIPTNAME# : MonoBehaviour
+ {
+    #region Variables
+    #NOTRIM#
+    #endregion
+    
+    #region Properties
+    #NOTRIM#
+    #endregion
+    
+    #region Constructor
+    public #SCRIPTNAME#()
+    {
+    #NOTRIM#
+    }
+    #endregion
+    
+    #region Unity Callbacks
+    private void Start()
+    {
+    #NOTRIM#
+    }
+    	
+    private void Update()
+    {
+    #NOTRIM#
+    }
+    #endregion
+    
+    #region Methods
+    #NOTRIM#
+    #endregion
+}
+
+[CustomEditor(typeof(#SCRIPTNAME#))]
+public class #SCRIPTNAME#EditorCustom: Editor
+ {
+     public override void OnInspectorGUI()
+     {
+        #SCRIPTNAME# _target = (#SCRIPTNAME#)target;
+        DrawDefaultInspector();
+     }
+}
