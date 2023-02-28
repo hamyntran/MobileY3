@@ -49,12 +49,6 @@ public class LaneGenerator : MonoBehaviour
         maxLanes = currentLanes.Count;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /// <summary>
     /// Later Inprovement: Object Pooling
     /// </summary>
@@ -68,7 +62,7 @@ public class LaneGenerator : MonoBehaviour
             GameObject newLane = Instantiate(laneDatas[randLane].prefab, currentPos, quaternion.identity);
             currentLanes.Add(newLane);
             currentPos.z += laneWidth;
-            newLane.transform.parent = transform;
+           // newLane.transform.parent = transform;
         }
         
         if (!start)

@@ -111,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_attackIput)
         {
-            _playerBehaviourScr.TriggerPlayerAnimation(PlayerAnimation.PlayerAttack);
+            _playerBehaviourScr.playerAnimation.TriggerPlayerAnimation(PlayerAnimationState.PlayerAttack);
         }
     }
 
@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
     {
         DOHopAnimation();
         
-        _playerBehaviourScr.TriggerPlayerAnimation(PlayerAnimation.PlayerJump);
+        _playerBehaviourScr.playerAnimation.TriggerPlayerAnimation(PlayerAnimationState.PlayerJump);
         
         _hopping = true;
         

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = Unity.Mathematics.Random;
 
 /*------------------------------------------
 Author: NAME
@@ -17,11 +18,16 @@ public class Lane : MonoBehaviour
     [SerializeField] private WeightedRandomList<GameObject> _obstacles;
     [SerializeField] private int _tensionGapMin = 2;
     [SerializeField] private int _tensionGapMax = 4;
+    
+    private int _gapScale => LaneGenerator.Instance.LaneWidth;
 
     private Vector3 _spawnPos = new Vector3();
 
-    private float width;
-    private float height;
+    private float _width;
+    private float _height;
+
+    private float _totalGap = 0;
+
     #endregion
 
     #region Properties
@@ -40,14 +46,18 @@ public class Lane : MonoBehaviour
 
     private void Start()
     {
-        width = transform.localScale.x / 2;
-        height = transform.localScale.y / 2;
-        
+        _width = transform.localScale.x ;
+        _height = transform.localScale.y ;
+
+        _tensionGapMin *= _gapScale;
+        _tensionGapMax *= _gapScale;
+
         var pos = gameObject.transform.position;
-        pos.x -= width;
-        pos.y += height;
+        pos.x -= (_width / 2);
+        pos.y += (_height/ 2);
         _spawnPos = pos;
-        Debug.Log(_spawnPos);
+
+        Spawn();
     }
 
     private void Update()
@@ -60,7 +70,28 @@ public class Lane : MonoBehaviour
 
     private void Spawn()
     {
-        GameObject obstacle = _obstacles.GetRandom();
+        while (_totalGap < _width -_tensionGapMax)
+        {
+            GameObject obstacle = _obstacles.GetRandom();
+            int gap = UnityEngine.Random.Range(_tensionGapMin, _tensionGapMax);
+            
+            _totalGap += gap;
+            
+            UpdateSpawnPosition(gap);
+
+            GameObject newLane = Instantiate(obstacle, _spawnPos, Quaternion.identity);
+            newLane.transform.parent = transform;
+        }
     }
+
+    private void UpdateSpawnPosition(float gap)
+    {
+        var posX = _spawnPos.x;
+
+        posX += gap;
+
+        _spawnPos = new Vector3(posX, _spawnPos.y, _spawnPos.z);
+    }
+
     #endregion
 }

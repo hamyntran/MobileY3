@@ -46,9 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c98ceff9544a84ca85eac2a60fe8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 100
   moveSpeed: 0.5
   rotateSpeed: 0.5
+  jumpHeight: 3
+  _playerHolder: {fileID: 0}
 --- !u!114 &6374049433510885868
 MonoBehaviour:
   m_ObjectHideFlags: 0

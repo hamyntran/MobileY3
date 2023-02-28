@@ -14,7 +14,7 @@ Last modified by: NAME
 /// 
 /// </summary>
 
-public enum PlayerAnimation
+public enum PlayerAnimationState
 {
     PlayerIdle,
     PlayerRun,
@@ -27,16 +27,13 @@ public enum PlayerAnimation
 public class PlayerBehaviour : MonoBehaviour
  {
     #region Variables
-    [SerializeField] private GameObject player;
-    private Animator _playerAnim;
+
+    public PlayerAnimation playerAnimation;
+    [SerializeField] private Sword _sword;
 
     #endregion
     
     #region Properties
-    public Animator PlayerAnim
-    {
-        get => _playerAnim;
-    }
     #endregion
     
     #region Constructor
@@ -49,7 +46,7 @@ public class PlayerBehaviour : MonoBehaviour
     #region Unity Callbacks
     private void Start()
     {
-        _playerAnim = player.GetComponent<Animator>();
+        _sword.Init(this);
     }
     	
     private void Update()
@@ -60,18 +57,7 @@ public class PlayerBehaviour : MonoBehaviour
     
     #region Methods
 
-    public void TriggerPlayerAnimation(PlayerAnimation animation)
-    {
-        switch (animation)
-        {
-            case(PlayerAnimation.PlayerAttack):
-                _playerAnim.SetTrigger("Attack");
-                break;
-            case(PlayerAnimation.PlayerJump):
-                _playerAnim.SetTrigger("Jump");
-                break;
-        }
-    }
+   
     #endregion
 }
 
