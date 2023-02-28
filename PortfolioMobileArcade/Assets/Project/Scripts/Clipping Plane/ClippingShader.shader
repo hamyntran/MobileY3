@@ -7,7 +7,9 @@ Shader "Custom/ClippingShader"
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
 
-        [HDR] _CutoffColor("Cutoff Color", Color) =(1,0,0,0)
+        [HDR] _CutoffColor("Cutoff Color", Color) =(0,1,0,0)
+        [HDR] _Emission ("Emission", Color) = (0,0,0,1)
+
     }
     SubShader
     {
@@ -30,6 +32,7 @@ Shader "Custom/ClippingShader"
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
+        half3 _Emission;
 
         float4 _Plane;
         float4 _CutoffColor;
@@ -43,14 +46,12 @@ Shader "Custom/ClippingShader"
 
         void surf(Input IN, inout SurfaceOutputStandard o)
         {
-
             float distance = dot(IN.worldPos, _Plane.xyz);
             distance = distance + _Plane.w;
-
             clip(-distance);
 
-            float facing = IN.facing *0.5f +0.5;
-            
+            float facing = IN.facing * 0.5f + 0.5;
+
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
             o.Albedo = c.rgb;
@@ -58,6 +59,7 @@ Shader "Custom/ClippingShader"
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
+            o.Emission = lerp(_CutoffColor, _Emission, facing);
         }
         ENDCG
     }
