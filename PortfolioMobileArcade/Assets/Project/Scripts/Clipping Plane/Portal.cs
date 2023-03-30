@@ -5,42 +5,26 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    public List<PortalObject> PortalObjects = new List<PortalObject>();
     public Portal otherPortal;
+    public Transform _portalPos;
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        _portalPos = transform.GetChild(0);
+    }
+#endif
+    
     private void OnTriggerEnter(Collider other)
     {
-        var obj = other.gameObject.GetComponent<PortalObject>();
-
-        if (obj)
+        if (other.CompareTag("Portal"))
         {
-            PortalObjects.Add(obj);
-            
-            obj.EnterPortal(this,otherPortal );
+            other.transform.position = new Vector3(otherPortal._portalPos.position.x, other.transform.position.y,
+                otherPortal._portalPos.position.z);
+            other.transform.rotation = new Quaternion(transform.rotation.x, otherPortal.transform.rotation.y,
+                transform.rotation.z, transform.rotation.w);
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        var obj = other.gameObject.GetComponent<PortalObject>();
 
-        if (PortalObjects.Contains(obj))
-        {
-            PortalObjects.Remove(obj);
-            obj.ExitPortal();
-        }
-    }
-
-    private void Update()
-    {
-        foreach (PortalObject portalObject in PortalObjects)
-        {
-            Vector3 objPos = transform.InverseTransformPoint(portalObject.transform.position);
-            
-            Debug.Log(objPos.z);
-            if (objPos.z > 0)
-            {
-                portalObject.Warp();
-            }
-        }
-    }
 }

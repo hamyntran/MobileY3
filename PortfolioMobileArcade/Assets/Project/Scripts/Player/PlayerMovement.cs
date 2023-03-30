@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     [FormerlySerializedAs("_jumpForce")]
     [Header("Movement setting")]
     [FormerlySerializedAs("_moveSpeed")] [SerializeField] private float moveSpeed = .5f;
-    [FormerlySerializedAs("_rotateSpeed")] [SerializeField] private float rotateSpeed = .5f;
     [SerializeField] private float jumpHeight = 3;
     
     /*----------References---------*/

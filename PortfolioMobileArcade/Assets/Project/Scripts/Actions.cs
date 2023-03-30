@@ -18,6 +18,8 @@ public static class Actions
 
     public static Action<IDestroyable> DestroyObstacle;
     public static Action<int> GainCoin;
+    public static Action Stun;
+    public static Action FinishedStunning;
 
     #endregion
 
