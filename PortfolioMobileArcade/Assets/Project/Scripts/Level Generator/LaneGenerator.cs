@@ -1,41 +1,26 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LaneGenerator : MonoBehaviour
 {
-    public static LaneGenerator Instance;
-    
     [SerializeField] private List<LaneDatas> laneDatas;
     [SerializeField] private int laneWidth = 1;
 
-    public int LaneWidth
-    {
-        get => laneWidth;
-    }
+    public int MinTension;
+    public int MaxTension;
+    public int MinPortalRange;
+    public int MaxPortalRange;
+    public int LaneWidth => laneWidth;
 
     [SerializeField] private int maxLanes = 10;
 
-    private List<GameObject> currentLanes = new List<GameObject>() ;
+    private List<GameObject> currentLanes = new List<GameObject>();
     private Vector3 currentPos;
-    
-    
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-        
-        DontDestroyOnLoad(this);
-    }
 
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -62,9 +47,9 @@ public class LaneGenerator : MonoBehaviour
             GameObject newLane = Instantiate(laneDatas[randLane].prefab, currentPos, quaternion.identity);
             currentLanes.Add(newLane);
             currentPos.z += laneWidth;
-           // newLane.transform.parent = transform;
+            // newLane.transform.parent = transform;
         }
-        
+
         if (!start)
         {
             if (currentLanes.Count > maxLanes)

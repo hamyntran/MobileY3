@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using Random = Unity.Mathematics.Random;
 
 /*------------------------------------------
 Author: NAME
@@ -16,10 +14,13 @@ public class Lane : MonoBehaviour
     #region Variables
 
     [SerializeField] private WeightedRandomList<GameObject> _obstacles;
-    [SerializeField] private int _tensionGapMin = 2;
-    [SerializeField] private int _tensionGapMax = 4;
-    
-    private int _gapScale => LaneGenerator.Instance.LaneWidth;
+
+    private int _tensionGapMin => InGameManager.Instance.Generator.MinTension ;
+    private int _tensionGapMax => InGameManager.Instance.Generator.MaxTension;
+
+
+    private int _gapScale => InGameManager.Instance.Generator.LaneWidth;
+
 
     private Vector3 _spawnPos = new Vector3();
 
@@ -34,27 +35,17 @@ public class Lane : MonoBehaviour
 
     #endregion
 
-    #region Constructor
-
-    public Lane()
-    {
-    }
-
-    #endregion
 
     #region Unity Callbacks
 
     private void Start()
     {
-        _width = transform.localScale.x ;
-        _height = transform.localScale.y ;
-
-        _tensionGapMin *= _gapScale;
-        _tensionGapMax *= _gapScale;
+        _width = transform.localScale.x;
+        _height = transform.localScale.y;
 
         var pos = gameObject.transform.position;
         pos.x -= (_width / 2);
-        pos.y += (_height/ 2);
+        pos.y += (_height / 2);
         _spawnPos = pos;
 
         Spawn();
@@ -70,13 +61,13 @@ public class Lane : MonoBehaviour
 
     private void Spawn()
     {
-        while (_totalGap < _width -_tensionGapMax)
+        while (_totalGap < _width - _tensionGapMax *_gapScale)
         {
             GameObject obstacle = _obstacles.GetRandom();
-            int gap = UnityEngine.Random.Range(_tensionGapMin, _tensionGapMax);
-            
+            int gap = UnityEngine.Random.Range(_tensionGapMin*_gapScale, _tensionGapMax *_gapScale);
+
             _totalGap += gap;
-            
+
             UpdateSpawnPosition(gap);
 
             GameObject newLane = Instantiate(obstacle, _spawnPos, Quaternion.identity);

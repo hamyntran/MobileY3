@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _inputForward, _inputBackward, _inputLeft, _inputRight, _attackIput = false;
     private bool _hopping = false;
     private Vector3 _nextDir;
-    private int _gap => LaneGenerator.Instance.LaneWidth;
+    private int _gap => InGameManager.Instance.Generator.LaneWidth;
 
     
     
@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
             
             MovePlayer(new Vector3(round,0,_gap));
             
-            LaneGenerator.Instance.GenerateLane(false);
+            InGameManager.Instance.Generator.GenerateLane(false);
         }
         
         if (_inputBackward)

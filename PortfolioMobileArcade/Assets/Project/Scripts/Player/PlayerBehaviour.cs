@@ -1,11 +1,13 @@
-using System.Collections;
+ using System;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
 using Newtonsoft.Json;
+ using Unity.VisualScripting;
 
-/*------------------------------------------
+ /*------------------------------------------
 Author: NAME
 Last modified by: NAME
 -------------------------------------------*/
@@ -53,6 +55,14 @@ public class PlayerBehaviour : MonoBehaviour
     {
     
     }
+
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+    }
+    
+
     #endregion
     
     #region Methods
@@ -70,3 +80,4 @@ public class PlayerBehaviourEditorCustom: Editor
         DrawDefaultInspector();
      }
 }
+
