@@ -16,10 +16,11 @@ public static class Actions
  {
     #region Variables
 
-    public static Action<IDestroyable> DestroyObstacle;
+    public static Action<ISwordAttacked> DestroyObstacle;
     public static Action<int> GainCoin;
     public static Action Stun;
     public static Action FinishedStunning;
+    public static Action HitPlayer;
 
     #endregion
 

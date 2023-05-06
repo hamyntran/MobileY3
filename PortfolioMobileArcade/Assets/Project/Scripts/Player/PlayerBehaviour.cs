@@ -32,6 +32,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     public PlayerAnimation playerAnimation;
     [SerializeField] private Sword _sword;
+    
+    
+    private UnitHealth _health;
+    [SerializeField] private int _maxHealth = 100;
 
     #endregion
     
@@ -49,6 +53,9 @@ public class PlayerBehaviour : MonoBehaviour
     private void Start()
     {
         _sword.Init(this);
+        _health = new UnitHealth(_maxHealth, _maxHealth);
+
+        Actions.HitPlayer += HitByOther;
     }
     	
     private void Update()
@@ -56,19 +63,21 @@ public class PlayerBehaviour : MonoBehaviour
     
     }
 
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-    }
-    
-
     #endregion
-    
+
     #region Methods
 
-   
+    private void HitByOther()
+    {
+        //Play animation
+        Debug.Log("die");
+        //Die
+        
+        //Game Over
+    }
+
     #endregion
+    
 }
 
 [CustomEditor(typeof(PlayerBehaviour))]

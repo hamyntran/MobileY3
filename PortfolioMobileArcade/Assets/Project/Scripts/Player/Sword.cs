@@ -21,10 +21,10 @@ public class Sword : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Obstacle destroyale = other.GetComponent<Obstacle>();
-        if (  destroyale != null && _attacking)
+        Obstacle obstacle = other.GetComponent<Obstacle>();
+        if (  obstacle != null && _attacking)
         {
-            destroyale.Destroyable?.Destroyed(other.gameObject);
+            obstacle.swordAttacked?.Attacked(other.gameObject);
         }
     }
 }

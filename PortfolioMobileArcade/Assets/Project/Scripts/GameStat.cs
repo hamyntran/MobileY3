@@ -15,7 +15,7 @@ public class GameStat : MonoBehaviour
         Actions.GainCoin += UpdateGainedCoin;
     }
 
-    private void UpdateDestroyedObstacles(IDestroyable go)
+    private void UpdateDestroyedObstacles(ISwordAttacked go)
     {
         _destroyedObstacle++;
         

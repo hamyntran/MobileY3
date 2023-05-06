@@ -7,19 +7,19 @@ public interface IProvideCoin
     public void ProvideCoin(int coin);
 }
 
-public interface IDestroyable
+public interface ISwordAttacked
 {
-    public void Destroyed(GameObject go);
+    public void Attacked(GameObject go);
 }
 
-public class StaticAndCoinDestroyable : IDestroyable, IProvideCoin
+public class StaticAndCoinSwordAttacked : ISwordAttacked, IProvideCoin
 {
     private int _coin;
-    public StaticAndCoinDestroyable(int coin)
+    public StaticAndCoinSwordAttacked(int coin)
     {
         _coin = coin;
     }
-    public void Destroyed(GameObject go)
+    public void Attacked(GameObject go)
     {
         GameObject.Destroy(go);
         Actions.DestroyObstacle(this);

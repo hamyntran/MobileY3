@@ -13,11 +13,10 @@ public class Lane : MonoBehaviour
 {
     #region Variables
 
-    [SerializeField] private WeightedRandomList<GameObject> _obstacles;
+    [SerializeField] private WeightedRandomList<Obstacle> _obstacles;
 
     private int _tensionGapMin => InGameManager.Instance.Generator.MinTension ;
     private int _tensionGapMax => InGameManager.Instance.Generator.MaxTension;
-
 
     private int _gapScale => InGameManager.Instance.Generator.LaneWidth;
 
@@ -44,7 +43,7 @@ public class Lane : MonoBehaviour
         _height = transform.localScale.y;
 
         var pos = gameObject.transform.position;
-        pos.x -= (_width / 2);
+        pos.x -= (_width / 2)-1;
         pos.y += (_height / 2);
         _spawnPos = pos;
 
@@ -63,23 +62,24 @@ public class Lane : MonoBehaviour
     {
         while (_totalGap < _width - _tensionGapMax *_gapScale)
         {
-            GameObject obstacle = _obstacles.GetRandom();
-            int gap = UnityEngine.Random.Range(_tensionGapMin*_gapScale, _tensionGapMax *_gapScale);
+            Obstacle obstacle = _obstacles.GetRandom();
+            int gap = Random.Range(_tensionGapMin*_gapScale, _tensionGapMax *_gapScale);
 
-            _totalGap += gap;
+            
+            Obstacle newOpstacle = Instantiate(obstacle, _spawnPos, Quaternion.identity);
+            newOpstacle.transform.parent = transform;
+            
+            _totalGap += (gap  + newOpstacle.length);
 
-            UpdateSpawnPosition(gap);
-
-            GameObject newLane = Instantiate(obstacle, _spawnPos, Quaternion.identity);
-            newLane.transform.parent = transform;
+            UpdateSpawnPosition(gap, newOpstacle.length);
         }
     }
 
-    private void UpdateSpawnPosition(float gap)
+    private void UpdateSpawnPosition(float gap, int length)
     {
         var posX = _spawnPos.x;
 
-        posX += gap;
+        posX += (gap  + length);
 
         _spawnPos = new Vector3(posX, _spawnPos.y, _spawnPos.z);
     }

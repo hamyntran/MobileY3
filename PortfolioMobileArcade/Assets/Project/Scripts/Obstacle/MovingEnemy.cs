@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -5,8 +6,7 @@ using UnityEngine;
 
 public class MovingEnemy : MonoBehaviour
 {
-    public float speed = 4;
-
+    [SerializeField] float speed = 4;
     private Animator _animator;
 
     private bool stunning = false;
@@ -18,6 +18,12 @@ public class MovingEnemy : MonoBehaviour
 
         Actions.Stun += Stun;
         Actions.FinishedStunning += Continue;
+    }
+
+    private void OnDisable()
+    {
+        Actions.Stun -= Stun;
+        Actions.FinishedStunning -= Continue;
     }
 
     // Update is called once per frame
@@ -39,5 +45,13 @@ public class MovingEnemy : MonoBehaviour
         stunning = false;
         _animator.SetInteger("Walk",1);
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+             Actions.HitPlayer.Invoke();
+        }
     }
 }

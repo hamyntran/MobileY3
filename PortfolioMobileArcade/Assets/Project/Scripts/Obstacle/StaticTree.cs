@@ -18,7 +18,7 @@ public class StaticTree : Obstacle
 	protected override void Start()
 	{
 		base.Start();
-		Destroyable = new StaticAndCoinDestroyable(coinReward);
+		swordAttacked = new StaticAndCoinSwordAttacked(coinReward);
 	}
 	
 }

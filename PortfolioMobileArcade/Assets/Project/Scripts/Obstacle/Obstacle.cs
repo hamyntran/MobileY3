@@ -15,7 +15,8 @@ public class Obstacle : MonoBehaviour
  {
     #region Variables
 
-    public IDestroyable Destroyable;
+    public ISwordAttacked swordAttacked;
+    public int length = 0;
 
     #endregion
     
