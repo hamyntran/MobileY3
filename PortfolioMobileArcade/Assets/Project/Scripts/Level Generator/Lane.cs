@@ -70,9 +70,9 @@ public class Lane : MonoBehaviour
             Obstacle newOpstacle = Instantiate(obstacle, _spawnPos, Quaternion.identity);
             newOpstacle.transform.parent = transform;
             
-            _totalGap += (gap  + newOpstacle.length);
+            _totalGap += (gap  + newOpstacle.Length);
 
-            UpdateSpawnPosition(gap, newOpstacle.length);
+            UpdateSpawnPosition(gap, newOpstacle.Length);
         }
     }
 

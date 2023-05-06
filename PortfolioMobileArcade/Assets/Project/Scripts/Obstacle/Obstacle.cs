@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /*------------------------------------------
 Author: NAME
@@ -16,7 +17,8 @@ public class Obstacle : MonoBehaviour
     #region Variables
 
     public ISwordAttacked swordAttacked;
-    public int length = 0;
+    [SerializeField] protected int _length =0;
+    public int Length => _length;
 
     #endregion
     
