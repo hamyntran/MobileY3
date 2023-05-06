@@ -47,7 +47,8 @@ public class Lane : MonoBehaviour
         pos.y += (_height / 2);
         _spawnPos = pos;
 
-        Spawn();
+        if(_obstacles.Count >0) Spawn();
+       
     }
 
     private void Update()

@@ -132,11 +132,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void DOHopAnimation()
     {
-        var jumpY = _playerHolder.position.y + jumpHeight;
+        var onGroundY = _playerHolder.position.y;
+        var jumpY = onGroundY + jumpHeight;
 
         _playerHolder.DOMoveY(jumpY, moveSpeed).OnComplete(() =>
         {
-            _playerHolder.DOMoveY(_onGroundPosition.y, moveSpeed).OnComplete(() =>
+            _playerHolder.DOMoveY(onGroundY, moveSpeed).OnComplete(() =>
             {
                 FinishHopping();
             });

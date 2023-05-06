@@ -570,12 +570,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laneDatas:
   - {fileID: 11400000, guid: b2179da71936a2a4e8107f8ed2b17b0c, type: 2}
+  startLane: {fileID: 11400000, guid: 0b4bebbc51e31ee4588a597b9111c501, type: 2}
   laneWidth: 1
   MinTension: 1
   MaxTension: 3
   MinPortalRange: 1
   MaxPortalRange: 4
-  maxLanes: 20
+  _maxLaneQuant: 20
+  _startLaneQuant: 10
 --- !u!4 &725465330
 Transform:
   m_ObjectHideFlags: 0
@@ -584,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725465328}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1212,6 +1214,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 279086385, guid: 75429c7b52ad8164bb56ba46e7f4bae2, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 279086385, guid: 75429c7b52ad8164bb56ba46e7f4bae2, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578458071, guid: 75429c7b52ad8164bb56ba46e7f4bae2, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993430942494104585, guid: 75429c7b52ad8164bb56ba46e7f4bae2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6374049433510885864, guid: 75429c7b52ad8164bb56ba46e7f4bae2,
         type: 3}
       propertyPath: m_Name
@@ -1235,7 +1254,7 @@ PrefabInstance:
     - target: {fileID: 6374049433510885870, guid: 75429c7b52ad8164bb56ba46e7f4bae2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.37
+      value: -6.2
       objectReference: {fileID: 0}
     - target: {fileID: 6374049433510885870, guid: 75429c7b52ad8164bb56ba46e7f4bae2,
         type: 3}
@@ -1271,6 +1290,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6374049433510885871, guid: 75429c7b52ad8164bb56ba46e7f4bae2,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75429c7b52ad8164bb56ba46e7f4bae2, type: 3}

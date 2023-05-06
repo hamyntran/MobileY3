@@ -9,6 +9,9 @@ public class ChangeScene : Editor
     private const string SCENE_MERGED = "ScriptTesting";
     private const string SCENE_CAR = "Car";
     private const string SCENE_ENVIRONMENT = "EnvironmentAssets";
+    private const string SCENE_MAINMENU = "MainMenu";
+    
+        
 
 
     [MenuItem("Open Scene/Script Testing #1")]
@@ -27,6 +30,12 @@ public class ChangeScene : Editor
     public static void OpenEnvironmentAssetsScene()
     {
         OpenScene(SCENE_ENVIRONMENT);
+    }
+    
+    [MenuItem("Open Scene/Main Menu #4")]
+    public static void OpenMainMenuScene()
+    {
+        OpenScene(SCENE_MAINMENU);
     }
     
     private static void OpenScene(string sceneName)
