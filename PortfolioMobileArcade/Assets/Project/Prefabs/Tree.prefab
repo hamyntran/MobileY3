@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85c33814ff64744d92c83f868c0bac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 2
+  _length: 1
   coinReward: 5
 --- !u!65 &4860928132820878657
 BoxCollider:

@@ -20,7 +20,6 @@ public class Lane : MonoBehaviour
 
     private int _gapScale => InGameManager.Instance.Generator.LaneWidth;
 
-
     private Vector3 _spawnPos = new Vector3();
 
     private float _width;
@@ -65,12 +64,17 @@ public class Lane : MonoBehaviour
         {
             Obstacle obstacle = _obstacles.GetRandom();
             int gap = Random.Range(_tensionGapMin*_gapScale, _tensionGapMax *_gapScale);
-
             
             Obstacle newOpstacle = Instantiate(obstacle, _spawnPos, Quaternion.identity);
             newOpstacle.transform.parent = transform;
             
             _totalGap += (gap  + newOpstacle.Length);
+
+            if (_totalGap > _width - _tensionGapMax * _gapScale)
+            {
+                Destroy(newOpstacle);
+            }
+
 
             UpdateSpawnPosition(gap, newOpstacle.Length);
         }

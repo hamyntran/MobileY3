@@ -8,13 +8,7 @@ public class Portal : MonoBehaviour
     public Portal otherPortal;
     public Transform _portalPos;
 
-/*#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        _portalPos = transform.GetChild(0);
-    }
-#endif*/
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Portal"))
@@ -25,6 +19,5 @@ public class Portal : MonoBehaviour
                 transform.rotation.z, transform.rotation.w);
         }
     }
-
 
 }

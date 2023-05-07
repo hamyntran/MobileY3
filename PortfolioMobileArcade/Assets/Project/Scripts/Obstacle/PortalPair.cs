@@ -26,6 +26,7 @@ public class PortalPair : Obstacle
         
         portalA.transform.localPosition = new Vector3(0, 0, 0);
         portalB.transform.localPosition = new Vector3(_length, 0, 0);
+        portalA.transform.localEulerAngles = new Vector3(0, 90, 0);
         portalB.transform.localEulerAngles = new Vector3(0, portalA.transform.localEulerAngles.y*-1, 0);
 
         portalA.gameObject.name = "Portal A";
