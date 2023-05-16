@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RoadLane
   m_EditorClassIdentifier: 
   prefab: {fileID: 8911355916496358099, guid: 181f3288127f908429d54e747e0700f9, type: 3}
-  maxInChain: 3
+  maxInChain: 1

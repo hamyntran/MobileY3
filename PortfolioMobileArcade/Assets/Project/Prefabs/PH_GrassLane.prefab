@@ -114,7 +114,12 @@ MonoBehaviour:
     list:
     - item: {fileID: 6262513339082525691, guid: dac948ae688094c4a8a4b75bf0e70acd,
         type: 3}
-      weight: 3
-    - item: {fileID: 8962513609971618735, guid: 736d2852901a2e742886692e173bde86,
+      weight: 5
+    - item: {fileID: 6262513339082525691, guid: 86b8642fb4009d747af1285223183b95,
         type: 3}
-      weight: 1
+      weight: 5
+    - item: {fileID: 6262513339082525691, guid: 2aa23bfc983157449a6fa21ffe2bdf1f,
+        type: 3}
+      weight: 5
+  _tensionGapMin: 0
+  _tensionGapMax: 4

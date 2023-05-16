@@ -11,6 +11,7 @@ public class LaneGenerator : MonoBehaviour
 
     [SerializeField] private int laneWidth = 1;
 
+    public int TrySpawn = 5;
     public int MinTension;
     public int MaxTension;
     public int MinPortalRange;

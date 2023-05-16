@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 /*------------------------------------------
@@ -15,11 +14,11 @@ public class Lane : MonoBehaviour
 
     [SerializeField] private WeightedRandomList<Obstacle> _obstacles;
 
-    private int _tensionGapMin => InGameManager.Instance.Generator.MinTension ;
-    private int _tensionGapMax => InGameManager.Instance.Generator.MaxTension;
+    [SerializeField] private int _tensionGapMin = 1;
+    [SerializeField] private int _tensionGapMax = 3;
 
     private int _gapScale => InGameManager.Instance.Generator.LaneWidth;
-
+    private int _trySpawn => InGameManager.Instance.Generator.TrySpawn;
     private Vector3 _spawnPos = new Vector3();
 
     private float _width;
@@ -33,7 +32,6 @@ public class Lane : MonoBehaviour
 
     #endregion
 
-
     #region Unity Callbacks
 
     private void Start()
@@ -42,12 +40,11 @@ public class Lane : MonoBehaviour
         _height = transform.localScale.y;
 
         var pos = gameObject.transform.position;
-        pos.x -= (_width / 2)-1;
+        pos.x -= (_width / 2) - 1;
         pos.y += (_height / 2);
         _spawnPos = pos;
 
-        if(_obstacles.Count >0) Spawn();
-       
+        if (_obstacles.Count > 0) Spawn();
     }
 
     private void Update()
@@ -60,23 +57,53 @@ public class Lane : MonoBehaviour
 
     private void Spawn()
     {
-        while (_totalGap < _width - _tensionGapMax *_gapScale)
+        while (_totalGap < _width - _tensionGapMax * _gapScale)
         {
             Obstacle obstacle = _obstacles.GetRandom();
-            int gap = Random.Range(_tensionGapMin*_gapScale, _tensionGapMax *_gapScale);
-            
+            int gap = Random.Range(_tensionGapMin * _gapScale, _tensionGapMax * _gapScale);
+
             Obstacle newOpstacle = Instantiate(obstacle, _spawnPos, Quaternion.identity);
             newOpstacle.transform.parent = transform;
-            
-            _totalGap += (gap  + newOpstacle.Length);
+
+            _totalGap += (gap + newOpstacle.Length);
 
             if (_totalGap > _width - _tensionGapMax * _gapScale)
             {
-                Destroy(newOpstacle);
+                _totalGap -= (gap + newOpstacle.Length);
+                Destroy(newOpstacle.gameObject);
+                TrySpawn();
+                return;
             }
-
+            
+            newOpstacle._ativation?.Activate(newOpstacle);
 
             UpdateSpawnPosition(gap, newOpstacle.Length);
+        }
+    }
+
+    protected void TrySpawn()
+    {
+        for (int t = 0; t < _trySpawn; t++)
+        {
+            Obstacle obstacle = _obstacles.GetRandom();
+            int gap = ((_tensionGapMin * _gapScale) >0)? _tensionGapMin * _gapScale : 1;
+
+            Obstacle newOpstacle = Instantiate(obstacle, _spawnPos, Quaternion.identity);
+
+            newOpstacle.transform.parent = transform;
+            _totalGap += (gap + newOpstacle.Length);
+
+            if (_totalGap > _width - _tensionGapMin * _gapScale)
+            {
+                _totalGap -= (gap + newOpstacle.Length);
+                Destroy(newOpstacle.gameObject);
+            }
+            else
+            {
+                newOpstacle._ativation?.Activate(newOpstacle);
+
+                UpdateSpawnPosition(gap, newOpstacle.Length);  
+            }
         }
     }
 
@@ -84,7 +111,7 @@ public class Lane : MonoBehaviour
     {
         var posX = _spawnPos.x;
 
-        posX += (gap  + length);
+        posX += (gap + length);
 
         _spawnPos = new Vector3(posX, _spawnPos.y, _spawnPos.z);
     }

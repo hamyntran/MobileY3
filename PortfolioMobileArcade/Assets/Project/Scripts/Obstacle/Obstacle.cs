@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class Obstacle : MonoBehaviour
 
     public ISwordAttacked swordAttacked;
     [SerializeField] protected int _length =0;
+    public ObstacleAtivation _ativation;
     public int Length => _length;
 
     #endregion
@@ -43,4 +45,10 @@ public class Obstacle : MonoBehaviour
     
     #endregion
 }
+
+public abstract class ObstacleAtivation
+{
+	public abstract void Activate(Obstacle obstacle);
+}
+
 

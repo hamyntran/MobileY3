@@ -48,3 +48,8 @@ MonoBehaviour:
   _portal: {fileID: 924578568202468954, guid: e46070e7035308d4e963b767c5785165, type: 3}
   _minGap: 8
   _maxGap: 12
+  _enemies:
+    list:
+    - item: {fileID: 6158955489466572582, guid: 475abcc78a4f85a42b29a42429cf7f0e,
+        type: 3}
+      weight: 1

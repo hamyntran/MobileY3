@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MovingEnemy : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MovingEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        speed += Random.Range(0, 0.5f);
         _animator = GetComponent<Animator>();
         _animator.SetInteger("Walk",1);
 

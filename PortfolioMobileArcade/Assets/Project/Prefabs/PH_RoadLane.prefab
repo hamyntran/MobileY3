@@ -112,8 +112,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstacles:
     list:
-    - item: {fileID: 8067394538378925124, guid: dac948ae688094c4a8a4b75bf0e70acd,
+    - item: {fileID: 8962513609971618735, guid: 736d2852901a2e742886692e173bde86,
         type: 3}
-      weight: 1
+      weight: 6
+    - item: {fileID: 6262513339082525691, guid: 2aa23bfc983157449a6fa21ffe2bdf1f,
+        type: 3}
+      weight: 0
   _tensionGapMin: 0
-  _tensionGapMax: 5
+  _tensionGapMax: 2

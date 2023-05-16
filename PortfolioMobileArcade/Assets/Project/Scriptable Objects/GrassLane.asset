@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GrassLane
   m_EditorClassIdentifier: 
   prefab: {fileID: 8754050433749842827, guid: 0c855fb235081cc4c90f5b92ed3fe606, type: 3}
-  maxInChain: 7
+  maxInChain: 3

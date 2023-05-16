@@ -29,7 +29,7 @@ public class WeightedRandomList<T>
     {
         list.Add(new Pair(item, weight));
     }
-    
+
     public T GetRandom()
     {
         float total = 0;

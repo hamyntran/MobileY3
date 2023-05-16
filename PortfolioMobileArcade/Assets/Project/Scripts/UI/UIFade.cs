@@ -13,7 +13,7 @@ public class UIFade : MonoBehaviour
 
     private void Start()
     {
-        Image fadeIMG = transform.GetChild(0).GetComponent<Image>();
+        Image fadeIMG = transform.Find("Fade IMG").GetComponent<Image>();
         if (fadeIMG) FadeOut(fadeIMG);
         else Debug.LogWarning($"Fade image was not assigned");
     }

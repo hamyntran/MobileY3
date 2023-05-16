@@ -10,6 +10,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
 
     public LaneGenerator Generator => _laneGenerator;
     public GameStat Stat => _gameStat;
+    
 
     public InGameUI GameUI => _inGameUI;
 
