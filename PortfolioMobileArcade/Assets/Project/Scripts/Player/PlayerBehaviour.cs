@@ -70,7 +70,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void HitByOther()
     {
         //Play animation
-        Debug.Log("die");
+         Debug.Log("die");
         //Die
         
         //Game Over

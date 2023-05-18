@@ -54,6 +54,13 @@ public class PortalPair : Obstacle
     {
         MovingEnemy enemy = _enemies.GetRandom();
         MovingEnemy newEnemy =  Instantiate(enemy, new Vector3(_portalPos.position.x,transform.position.y,_portalPos.position.z), _portalPos.transform.parent.transform.rotation);
+        if (Random.value < 0.5f)
+        {
+            var rotY = newEnemy.transform.rotation;
+            rotY.y*= -1;
+            newEnemy.transform.rotation = rotY;
+
+        }
     }
 
     private IEnumerator WaitToSpawnEnemy()
