@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Serialization;
@@ -20,17 +21,26 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _nextDir;
     private int _gap => InGameManager.Instance.Generator.LaneWidth;
 
-    
+    private bool _recieveInput;
     
     
     // Start is called before the first frame update
     void Start()
     {
+        _recieveInput = false;
+        InGameManager.Instance.OnGameStart += () => { _recieveInput = true; };
         _playerBehaviourScr = GetComponent<PlayerBehaviour>();
         transform.eulerAngles = new Vector3();
 
         _onGroundPosition = _playerHolder.position;
     }
+
+    /*
+    private void OnDisable()
+    {
+        InGameManager.Instance.OnGameStart -= () => { _recieveInput = false; };
+    }
+    */
 
     // Update is called once per frame
     void Update()
@@ -42,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     
     private void HandleInput()
     {
+        if(!_recieveInput) {return;}
         _inputForward = Input.GetKeyDown(KeyCode.W);
         _inputBackward = Input.GetKeyDown(KeyCode.S);
         _inputLeft = Input.GetKeyDown(KeyCode.A);

@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /*------------------------------------------
 Author: NAME
@@ -44,7 +46,12 @@ public class Lane : MonoBehaviour
         pos.y += (_height / 2);
         _spawnPos = pos;
 
-        if (_obstacles.Count > 0) Spawn();
+        InGameManager.Instance.OnGameStart += () => {  if (_obstacles.Count > 0) Spawn();};
+    }
+
+    private void OnDisable()
+    {
+        InGameManager.Instance.OnGameStart -= () => {  if (_obstacles.Count > 0) Spawn();};
     }
 
     private void Update()

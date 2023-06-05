@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class InGameManager : SingletonMonoBehaviour<InGameManager>
 {
@@ -10,7 +11,8 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
 
     public LaneGenerator Generator => _laneGenerator;
     public GameStat Stat => _gameStat;
-    
+
+    public Action OnGameStart;
 
     public InGameUI GameUI => _inGameUI;
 

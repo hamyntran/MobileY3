@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +8,28 @@ using DG.Tweening;
 
 public class UIFade : MonoBehaviour
 {
-    public void FadeIn(Image fadeGO) => fadeGO.DOFade(255,0.3f);
+    public void FadeIn(Image fadeGO) => fadeGO.DOFade(255,0.5f);
    
-    public void FadeOut(Image fadeGO) => fadeGO.DOFade(0,0.3f);
+    public void FadeOut(Image fadeGO) => fadeGO.DOFade(0,0.5f);
+
+    [SerializeField] private Image fadeIMG;
+
+    private void Awake()
+    {
+         fadeIMG = transform.Find("Fade IMG").GetComponent<Image>();
+         if (fadeIMG)
+         {
+             fadeIMG.color = new Color(0, 0, 0, 255);
+         }
+    }
 
     private void Start()
     {
-        Image fadeIMG = transform.Find("Fade IMG").GetComponent<Image>();
-        if (fadeIMG) FadeOut(fadeIMG);
+        if (fadeIMG)
+        {
+            fadeIMG.color = new Color(0, 0, 0, 255);
+            FadeOut(fadeIMG);
+        }
         else Debug.LogWarning($"Fade image was not assigned");
     }
 }
