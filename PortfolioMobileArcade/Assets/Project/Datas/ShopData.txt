@@ -1,0 +1,1 @@
+[{"Category":"Character","Item_name":"Lisa","Price":"45"},{"Category":"Background","Item_name":"Dreamy BG","Price":"10"},{"Category":"Background","Item_name":"Blue Ocean BG","Price":"12"},{"Category":"Background","Item_name":"Loyal BG","Price":"25"}]

@@ -1,27 +1,44 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-public class ObjectPooling : SingletonMonoBehaviour<ObjectPooling>
+public class ObjectPool : SingletonMonoBehaviour<ObjectPool>
 {
-    // Start is called before the first frame update
-    void Start()
+   private readonly ComponentPool _componentPool = new();
+
+    public void AddPooled<T>(T originalReference, int count = 1) where T : Component
     {
-        
+        _componentPool.AddToPool(originalReference, count);
     }
 
-    // Update is called once per frame
-    void Update()
+    public T Spawn<T>(T originalReference, Vector3 position = new Vector3(), Quaternion rotation = new Quaternion()) where T : Component
     {
-        
+        return _componentPool.GetAvailableObject(originalReference, position, rotation);
+    }
+
+    public void Recycle<T>(T cloneReference) where T : Component
+    {
+        _componentPool.ReturnCloneToPool(cloneReference);
+    }
+
+    public void Recycle<T>(T cloneReference, float delay) where T : Component
+    {
+        StartCoroutine(delayedRecycle());
+
+        IEnumerator delayedRecycle()
+        {
+            yield return new WaitForSeconds(delay);
+            _componentPool.ReturnCloneToPool(cloneReference);
+        }
     }
 }
-
 
 public class ComponentPool
 {
     //the queue of pooled components by their type and asset reference
-    private Dictionary<GameObject ,Queue<Component>> _pooledComponentsByType = new Dictionary<GameObject ,Queue<Component>>();
+    private readonly Dictionary<GameObject, Queue<Component>> _pooledComponentsByType = new();
 
     //dictionaries of instantied objects and their original object
     private Dictionary<GameObject, GameObject> _originalsByClones = new Dictionary<GameObject, GameObject>();
@@ -41,7 +58,7 @@ public class ComponentPool
         {
             _pooledComponentsByType.Add(originalReference.gameObject, components = new Queue<Component>());
         }
-        
+
         if (count < 0)
         {
             Debug.LogError("Count cannot be negative");
@@ -53,7 +70,7 @@ public class ComponentPool
         {
             //Instantiate new component and UPDATE the List of components
             Component clone = Object.Instantiate(originalReference);
-            _originalsByClones.Add(clone.gameObject,originalReference.gameObject);
+            _originalsByClones.Add(clone.gameObject, originalReference.gameObject);
             //De-activate each one until when needed
             clone.gameObject.SetActive(false);
             components.Enqueue(clone);
@@ -64,7 +81,7 @@ public class ComponentPool
 
 
     //Get available component in the ComponentPool
-    public T GetAvailableObject<T>(T originalReference) where T : Component
+    public T GetAvailableObject<T>(T originalReference, Vector3 position = new Vector3(), Quaternion rotation = new Quaternion()) where T : Component
     {
         //Get all component with the requested type from  the Dictionary
         if (_pooledComponentsByType.TryGetValue(originalReference.gameObject, out Queue<Component> components))
@@ -73,7 +90,10 @@ public class ComponentPool
             {
                 var component = components.Dequeue();
                 component.gameObject.SetActive(true);
-                return (T) component;
+                component.gameObject.SetActive(true);
+                component.transform.position = position;
+                component.transform.rotation = rotation;
+                return (T)component;
             }
         }
 
@@ -81,25 +101,27 @@ public class ComponentPool
         //Create new component, activate the GameObject and return it
         Component clone = AddToPool(originalReference).Dequeue();
         clone.gameObject.SetActive(true);
-        return (T) clone;
+        clone.transform.position = position;
+        clone.transform.rotation = rotation;
+        return (T)clone;
     }
 
     public void ReturnCloneToPool<T>(T cloneReference) where T : Component
     {
         Queue<Component> components;
-        
+
         GameObject clone = cloneReference.gameObject;
         clone.transform.position = Vector3.zero;
         clone.transform.rotation = Quaternion.identity;
         clone.SetActive(false);
 
         GameObject original = GetOriginal(clone);
-        
+
         if (!_pooledComponentsByType.TryGetValue(original, out components))
         {
             _pooledComponentsByType.Add(original, components = new Queue<Component>());
         }
-        
+
         components.Enqueue(cloneReference);
     }
 
@@ -110,7 +132,7 @@ public class ComponentPool
 
         return SetOriginal(clone, clone);
     }
-    
+
     private GameObject SetOriginal(GameObject clone, GameObject original)
     {
         if (!_originalsByClones.ContainsKey(clone))
@@ -121,4 +143,3 @@ public class ComponentPool
         return original;
     }
 }
-
