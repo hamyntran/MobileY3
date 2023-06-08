@@ -3,16 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InGameUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI destroyText;
-    [SerializeField] private TextMeshProUGUI coinText;
+
+    [SerializeField] private TextMeshProUGUI coinTMP;
 
     private void Start()
     {
-        SetCoinText(0);
+        Actions.GainCoin += SetCoinText;
+        Shop.OnItemBought += SetCoinText;
         SetDestroyText(0);
+        SetCoinText();
+    }
+
+    private void OnDestroy()
+    {
+        Actions.GainCoin -= SetCoinText;
+        Shop.OnItemBought -= SetCoinText;
     }
 
     public void SetDestroyText(int quant)
@@ -20,8 +30,18 @@ public class InGameUI : MonoBehaviour
         destroyText.text = $"Destroyed: {quant}";
     }
 
-    public void SetCoinText(int quant)
+    public void SetCoinText(int addition)
     {
-        coinText.text = $"Coin: {quant}";
+        coinTMP.text = CoinManager.Instance.Coin.ToString();
+    }
+    
+    public void SetCoinText(ShopItemData addition)
+    {
+        coinTMP.text = CoinManager.Instance.Coin.ToString();
+    }
+    
+    public void SetCoinText()
+    {
+        coinTMP.text = CoinManager.Instance.Coin.ToString();
     }
 }

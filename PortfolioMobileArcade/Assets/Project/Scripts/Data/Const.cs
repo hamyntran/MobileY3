@@ -116,4 +116,14 @@ public class Const
     
     #endregion
 
+    #region Shop Status
+
+    public const string Item_New = "new";
+    public const string Item_Bought = "bought";
+    public const string Item_Using = "using";
+    public const string Item_Unknown = "unknown";
+
+
+    #endregion
+
 }

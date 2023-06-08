@@ -28,6 +28,6 @@ public class StaticAndCoinSwordAttacked : ISwordAttacked, IProvideCoin
 
     public void ProvideCoin(int coin)
     {
-        Actions.GainCoin(coin);
+        Actions.GainCoin?.Invoke(coin);
     }
 }
