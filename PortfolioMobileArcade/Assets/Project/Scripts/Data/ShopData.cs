@@ -35,7 +35,7 @@ public class ShopData : MonoBehaviour
     }
     
     #endregion
-    private void Awake()
+    /*private void Awake()
     {
         CultureInfo ci = new CultureInfo("en-us");
         Thread.CurrentThread.CurrentCulture = ci;
@@ -48,7 +48,7 @@ public class ShopData : MonoBehaviour
         {
             ReadLocalData(data.text);
         }
-    }
+    }*/
 
     public void LoadData()
     {

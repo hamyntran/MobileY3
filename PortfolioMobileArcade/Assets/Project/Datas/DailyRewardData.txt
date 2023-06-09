@@ -1,0 +1,1 @@
+[{"Day":"1","Coin_reward":"20"},{"Day":"2","Coin_reward":"25"},{"Day":"3","Coin_reward":"30"},{"Day":"4","Coin_reward":"35"},{"Day":"5","Coin_reward":"40"},{"Day":"6","Coin_reward":"55"},{"Day":"7","Coin_reward":"70"},{"Day":"8","Coin_reward":"85"},{"Day":"9","Coin_reward":"100"},{"Day":"10","Coin_reward":"120"}]
