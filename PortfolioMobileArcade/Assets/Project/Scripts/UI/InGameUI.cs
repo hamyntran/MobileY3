@@ -13,7 +13,7 @@ public class InGameUI : MonoBehaviour
 
     private void Start()
     {
-        Actions.GainCoin += SetCoinText;
+        CoinManager.GainCoin += SetCoinText;
         Shop.OnItemBought += SetCoinText;
         SetDestroyText(0);
         SetCoinText();
@@ -21,7 +21,7 @@ public class InGameUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        Actions.GainCoin -= SetCoinText;
+        CoinManager.GainCoin -= SetCoinText;
         Shop.OnItemBought -= SetCoinText;
     }
 

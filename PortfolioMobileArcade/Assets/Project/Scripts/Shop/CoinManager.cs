@@ -35,11 +35,12 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
         }
     }
     #endregion
-    
+
+    public static Action<int> GainCoin;
     #region Unity Callbacks
     private void Start()
     {
-        Actions.GainCoin += AddCoin;
+        GainCoin += AddCoin;
         Shop.OnItemBought += UseCoin;
     }
 
@@ -74,11 +75,12 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
     #endregion
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(CoinManager))]
 public class CoinManagerEditorCustom: Editor
- {
-     public override void OnInspectorGUI()
-     {
+{
+    public override void OnInspectorGUI()
+    {
         CoinManager _target = (CoinManager)target;
         DrawDefaultInspector();
         
@@ -87,5 +89,6 @@ public class CoinManagerEditorCustom: Editor
             _target.AddCoin(10);
             Debug.Log(_target.Coin);
         }
-     }
+    }
 }
+#endif

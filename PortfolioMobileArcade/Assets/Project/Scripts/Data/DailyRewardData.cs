@@ -15,7 +15,7 @@ public class DailyRewardData : MonoBehaviour
 
 
     [Space(10)] [Header("LOADED DATA")] [SerializeField]private List<RewardData> allMissions = new List<RewardData>();
-    public List<RewardData> AllMissions => allMissions;
+    public List<RewardData> AllRewards => allMissions;
 
     public void LoadData()
     {

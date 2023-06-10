@@ -39,6 +39,7 @@ public class Shop : MonoBehaviour
             }
 
             newSlot.Init(_shopData.ShopItemDatas[i]);
+            
         }
     }
 
@@ -55,10 +56,14 @@ public class Shop : MonoBehaviour
         OnChangeCategory += ChangeCategoryTitleText;
         OnChangeCategory += SwitchShopListPanel;
         
+    }
+
+    private void OnEnable()
+    {
         OnChangeCategory?.Invoke(CATEGORY.Character);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         OnChangeCategory -= ChangeCategoryTitleText;
         OnChangeCategory -= SwitchShopListPanel;
