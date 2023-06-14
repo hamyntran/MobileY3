@@ -53,13 +53,15 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        OnChangeCategory += ChangeCategoryTitleText;
-        OnChangeCategory += SwitchShopListPanel;
+        
         
     }
 
     private void OnEnable()
     {
+        OnChangeCategory += ChangeCategoryTitleText;
+        OnChangeCategory += SwitchShopListPanel;
+        
         OnChangeCategory?.Invoke(CATEGORY.Character);
     }
 

@@ -35,4 +35,15 @@ public class Const
 
     #endregion
 
+
+    #region Mission Type Data
+
+    public const string Key_Mission = "Mission";
+    public const string Key_Start_amount = "Start_amount";
+    public const string Key_First_reward = "First_reward";
+    public const string Key_Amount_gap = "Amount_gap";
+    public const string Key_Reward_gap = "Reward_gap";
+    public const string Key_Note = "Note";
+
+    #endregion
 }

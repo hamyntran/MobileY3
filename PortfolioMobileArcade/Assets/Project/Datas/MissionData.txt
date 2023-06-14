@@ -1,0 +1,1 @@
+[{"Mission":"Game","Start_amount":"5","First_reward":"20","Amount_gap":"5","Reward_gap":"5","Note":"Play"},{"Mission":"Obstacle","Start_amount":"20","First_reward":"10","Amount_gap":"30","Reward_gap":"10","Note":"Destroy"},{"Mission":"Path Tile","Start_amount":"100","First_reward":"15","Amount_gap":"150","Reward_gap":"15","Note":"Pass"}]

@@ -22,7 +22,7 @@ public class StaticAndCoinSwordAttacked : ISwordAttacked, IProvideCoin
     public void Attacked(GameObject go)
     {
         GameObject.Destroy(go);
-        Actions.DestroyObstacle(this);
+        Actions.DestroyObstacle?.Invoke(this);
         ProvideCoin(_coin);
     }
 

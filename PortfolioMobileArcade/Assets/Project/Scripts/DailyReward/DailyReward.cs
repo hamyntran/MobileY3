@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DailyReward : MonoBehaviour
@@ -15,18 +16,10 @@ public class DailyReward : MonoBehaviour
 
     private List<RewardTile> _rewardTiles = new List<RewardTile>();
 
-    private void OnEnable()
-    {
-        OnOneDayPassed += () => { dailyRewardPanel.SetActive(true); };
-        OnOneDayPassed += CheckDailyStroke;
-        OnOneDayPassed += SetRewardsStatus;
-    }
-
-    /*********** DATA ***********/
-    private void Start()
+    private void Awake()
     {
         allRewardDatas = DataManager.Instance.DailyRewardData.AllRewards;
-
+        
         var orderedData = allRewardDatas.OrderBy(data => data.DayNo);
 
         foreach (RewardData data in orderedData)
@@ -37,6 +30,30 @@ public class DailyReward : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        OnOneDayPassed += () => { dailyRewardPanel.SetActive(true); };
+        OnOneDayPassed += CheckDailyStroke;
+        OnOneDayPassed += SetRewardsStatus;
+        
+     
+    }
+
+    private void OnDisable()
+    {
+        OnOneDayPassed -= () => { dailyRewardPanel.SetActive(true); };
+        OnOneDayPassed -= CheckDailyStroke;
+        OnOneDayPassed -= SetRewardsStatus;
+    }
+
+    /*********** DATA ***********/
+    private void Start()
+    {
+
+        
+    }
+    
+    
     private void CheckDailyStroke()
     {
         int highestDay = allRewardDatas.Max(x => x.DayNo);
@@ -57,6 +74,7 @@ public class DailyReward : MonoBehaviour
             else if (tile._data.DayNo == SaveTimeData.DailyStrike)
             {
                 tile.Status(RewardTile.DAILY_REWARD_STATUS.Today);
+
             }
             else
             {

@@ -1,9 +1,6 @@
 using Newtonsoft.Json;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Threading;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -110,8 +107,8 @@ public class ShopData : MonoBehaviour
 public class ShopItemData
 {
    public CATEGORY Category;
-    [FormerlySerializedAs("itemName")] public string ItemName;
-    [FormerlySerializedAs("price")] public int Price;
+     public string ItemName;
+    public int Price;
 
     public ShopItemData(Dictionary<string, string> data)
     {

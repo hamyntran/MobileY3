@@ -21,6 +21,9 @@ public static class Actions
     public static Action FinishedStunning;
     public static Action HitPlayer;
 
+    public static Action PlayGame;
+    public static Action PassRoad;
+
     #endregion
 
     #region Properties

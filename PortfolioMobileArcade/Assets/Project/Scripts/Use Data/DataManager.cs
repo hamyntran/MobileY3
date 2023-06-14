@@ -6,4 +6,5 @@ public class DataManager : SingletonMonoBehaviour<DataManager>
 {
     public ShopData ShopData;
     public DailyRewardData DailyRewardData;
+    public MissionData MissionData;
 }
