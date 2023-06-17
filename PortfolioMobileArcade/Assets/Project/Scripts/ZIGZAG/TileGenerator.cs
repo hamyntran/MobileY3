@@ -8,6 +8,7 @@ public class TileGenerator : SingletonMonoBehaviour<TileGenerator>
     [SerializeField] private int tileAmount = 15;
 
     [SerializeField] private List<GameObject> tiles;
+   public int CoinPosibility = 10;
     
     void Start()
     {
