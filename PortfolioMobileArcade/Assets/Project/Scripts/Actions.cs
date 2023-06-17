@@ -15,12 +15,6 @@ Last modified by: NAME
 public static class Actions
  {
     #region Variables
-
-    public static Action<ISwordAttacked> DestroyObstacle;
-    public static Action Stun;
-    public static Action FinishedStunning;
-    public static Action HitPlayer;
-
     public static Action PlayGame;
     public static Action PassRoad;
 

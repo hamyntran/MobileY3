@@ -43,14 +43,12 @@ public class MissionHistory : MonoBehaviour
 
     private void OnEnable()
     {
-        Actions.DestroyObstacle += a => { ObstacleDestroyed++; };
         Actions.PlayGame += () => { GamePlayed++; };
         Actions.PassRoad += () => { PathPassed++; };
     }
 
     private void OnDisable()
     {
-        Actions.DestroyObstacle -= a => { ObstacleDestroyed++; };
         Actions.PlayGame -= () => { GamePlayed++; };
         Actions.PassRoad -= () => { PathPassed++; };
     }
