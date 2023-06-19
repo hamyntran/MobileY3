@@ -20,6 +20,7 @@ public class ObjectPool : SingletonMonoBehaviour<ObjectPool>
 
     public T Spawn<T>(T originalReference, Vector3 position = new Vector3(), Quaternion rotation = new Quaternion()) where T : Component
     {
+        Debug.Log(originalReference);
         return _componentPool.GetAvailableObject(originalReference, position, rotation);
     }
 

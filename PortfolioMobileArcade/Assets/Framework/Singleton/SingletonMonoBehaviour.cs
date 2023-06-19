@@ -25,9 +25,10 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
                     _instance = singleton.AddComponent<T>();
                     singleton.name = "(singleton) " + typeof(T).ToString();
 
-                    DontDestroyOnLoad(singleton);
                 }
+                
             }
+            
 
             return _instance;
         }

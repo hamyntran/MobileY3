@@ -32,16 +32,17 @@ public class DailyReward : MonoBehaviour
 
     private void OnEnable()
     {
-        OnOneDayPassed += () => { dailyRewardPanel.SetActive(true); };
+        OnOneDayPassed += ShowDailyReward ;
         OnOneDayPassed += CheckDailyStroke;
         OnOneDayPassed += SetRewardsStatus;
-        
-     
     }
+
+    private void ShowDailyReward()
+    { dailyRewardPanel.SetActive(true); }
 
     private void OnDisable()
     {
-        OnOneDayPassed -= () => { dailyRewardPanel.SetActive(true); };
+        OnOneDayPassed -= ShowDailyReward ;
         OnOneDayPassed -= CheckDailyStroke;
         OnOneDayPassed -= SetRewardsStatus;
     }

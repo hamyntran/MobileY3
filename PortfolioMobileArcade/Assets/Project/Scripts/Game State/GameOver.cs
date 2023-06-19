@@ -21,20 +21,35 @@ public class GameOver : MonoBehaviour
 
    public void DoubleClaim()
    {
-      
+      AdsManager.Instance.PlayRewardAd(
+         () =>
+         {
+            AddGainedCoin(true);
+            OutGame();
+         });
    }
 
-   private void AddGainedCoin()
+   private void AddGainedCoin(bool doubleReward =false)
    {
-      CoinManager.GainCoin?.Invoke(InGame.CoinGained);
+      if (!doubleReward)
+      {
+         CoinManager.GainCoin?.Invoke(InGame.CoinGained);
+      }
+      else
+      {
+
+         Debug.Log($"Gained {InGame.CoinGained * 2}");
+
+         CoinManager.GainCoin?.Invoke(InGame.CoinGained * 2);
+      }
    }
 
-   private void OutGame()
+   public void OutGame()
    {
       GameManager.OnSwitchState?.Invoke(GameState.Begin);
-
-      SceneManager.LoadScene(0);
-
       ObjectPool.Instance.ClearAllPools();
+      SceneManager.LoadScene(0);
+      Debug.Log("loaff");
+
    }
 }

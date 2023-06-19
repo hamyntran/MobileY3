@@ -20,7 +20,6 @@ public class SaveTimeData : MonoBehaviour
     public void OnApplicationQuit()
     {
         _lastTimeExit = DateTime.UtcNow.ToString();
-        Debug.Log(_lastTimeExit);
     }
 
     private void Start()
@@ -41,7 +40,7 @@ public class SaveTimeData : MonoBehaviour
             DailyStrike = 0;
         }
 
-        Debug.Log($"{DateTime.UtcNow}. Last login is {timeSinceLastExit.Days} ago. Daily Day: {DailyStrike}");
+//        Debug.Log($"{DateTime.UtcNow}. Last login is {timeSinceLastExit.Days} ago. Daily Day: {DailyStrike}");
         
     }
 

@@ -23,19 +23,27 @@ public class InGame : MonoBehaviour
     private void OnEnable()
     {
         OnGainCoinInGame += AddCoinAmount;
-       // GameManager.OnPlayerDied +=EnableGameOverPanel;
+        
+        GameManager.OnPlayerDied +=CheckGainedCoin;
     }
 
-    private void EnableGameOverPanel()
+    private void CheckGainedCoin()
     {
-        gameOverPanel.gameObject.SetActive(true);
-        gameOverPanel.SetCoinText();
+        if (CoinGained == 0)
+        {
+            gameOverPanel.OutGame();
+        }
+        else
+        {
+            gameOverPanel.gameObject.SetActive(true);
+            gameOverPanel.SetCoinText();
+        }
     }
 
 
     private void OnDisable()
     {
-        GameManager.OnPlayerDied -=EnableGameOverPanel;
+        GameManager.OnPlayerDied -=CheckGainedCoin;
         OnGainCoinInGame -= AddCoinAmount;
     }
 

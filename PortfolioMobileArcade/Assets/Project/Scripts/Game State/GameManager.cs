@@ -64,4 +64,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 return;
         }
     }
+
+
+    public override void Awake()
+    {
+        base.Awake();
+    }
 }
