@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _die = false;
+        Time.timeScale = 1;
     }
 
     private void OnEnable()
@@ -73,6 +74,7 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         _die = true;
+        Time.timeScale = 0;
 
         GameManager.OnPlayerDied?.Invoke();
     }

@@ -29,12 +29,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         OnSwitchState += SwitchState;
         OnSwitchState += SwitchUI;
+        OnPlayerDied += PlayInterstitialAd;
+    }
+
+    private void PlayInterstitialAd()
+    {
+        AdsManager.Instance.PlayInterstitialAd();
     }
 
     private void OnDisable()
     {
         OnSwitchState -= SwitchState;
         OnSwitchState -= SwitchUI;
+        OnPlayerDied -= PlayInterstitialAd;
     }
 
     private void SwitchState(GameState state)

@@ -3330,6 +3330,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734026944}
   m_CullTransparentMesh: 0
+--- !u!1 &786451401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 786451402}
+  - component: {fileID: 786451403}
+  m_Layer: 0
+  m_Name: Ad Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &786451402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786451401}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1462667544}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &786451403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786451401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 247f9161c4f80664c89d4584c9ebbb1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameID: 5319913
+  testMode: 1
+  _androidAdUnitId: Android_Game_Over_
 --- !u!1 &821484380
 GameObject:
   m_ObjectHideFlags: 0
@@ -5832,6 +5879,7 @@ Transform:
   m_Children:
   - {fileID: 1103129360}
   - {fileID: 1410468962}
+  - {fileID: 786451402}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7915,7 +7963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dbd0f6d9913fc47a401d95896ae8bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5.03
+  movementSpeed: 10
   playerMask:
     serializedVersion: 2
     m_Bits: 115

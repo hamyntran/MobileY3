@@ -23,7 +23,7 @@ public class InGame : MonoBehaviour
     private void OnEnable()
     {
         OnGainCoinInGame += AddCoinAmount;
-        GameManager.OnPlayerDied +=EnableGameOverPanel;
+       // GameManager.OnPlayerDied +=EnableGameOverPanel;
     }
 
     private void EnableGameOverPanel()

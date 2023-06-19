@@ -10,8 +10,6 @@ public class Missions : MonoBehaviour
    [SerializeField] private MissionTile missionTile;
    [SerializeField] private Transform missionContent;
 
-
-
    private void Awake()
    {
       allMissions = DataManager.Instance.MissionData.MissionTypeDatas;
