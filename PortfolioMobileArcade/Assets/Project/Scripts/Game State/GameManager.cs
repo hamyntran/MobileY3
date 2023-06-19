@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState
+{
+    Begin,
+    InGame
+}
+
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-    public enum GameState
-    {
-        Begin,
-        InGame
-    }
-
     [SerializeField] private GameObject mainMenuUI, inGameUI;
 
     private GameState _currentState;

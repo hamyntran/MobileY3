@@ -10,14 +10,12 @@ public class StartGameDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.Instance.CurrentState != GameManager.GameState.Begin) {return;}
+        if(GameManager.Instance.CurrentState != GameState.Begin) {return;}
 
         if (Input.GetMouseButtonDown(0)
             && EventSystem.current.currentSelectedGameObject == null && !PanelOpen())
         {
-            GameManager.OnSwitchState?.Invoke( GameManager.GameState.InGame);
-            
-            Debug.Log("switchhhhhh");
+            GameManager.OnSwitchState?.Invoke( GameState.InGame);
         }
     }
 

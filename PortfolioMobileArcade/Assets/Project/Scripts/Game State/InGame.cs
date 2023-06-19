@@ -9,7 +9,7 @@ public class InGame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinTMP;
     public static int CoinGained = 0;
     public static Action<int> OnGainCoinInGame;
-    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameOver gameOverPanel;
 
 
     private void Start()
@@ -17,7 +17,7 @@ public class InGame : MonoBehaviour
         CoinGained = 0;
         SetCoinText();
         
-        gameOverPanel.SetActive(false);
+        gameOverPanel.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -28,7 +28,8 @@ public class InGame : MonoBehaviour
 
     private void EnableGameOverPanel()
     {
-        gameOverPanel.SetActive(true);
+        gameOverPanel.gameObject.SetActive(true);
+        gameOverPanel.SetCoinText();
     }
 
 
@@ -41,7 +42,6 @@ public class InGame : MonoBehaviour
     private void AddCoinAmount(int add)
     {
         CoinGained += add;
-
         SetCoinText();
     }
 

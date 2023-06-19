@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+   [SerializeField] private TextMeshProUGUI coinTMP;
+   
+   public void SetCoinText()
+   {
+      coinTMP.text = $"x{InGame.CoinGained.ToString()}";
+   }
    public void Claim()
    {
       AddGainedCoin();
@@ -24,7 +31,7 @@ public class GameOver : MonoBehaviour
 
    private void OutGame()
    {
-      GameManager.OnSwitchState?.Invoke(GameManager.GameState.Begin);
+      GameManager.OnSwitchState?.Invoke(GameState.Begin);
 
       SceneManager.LoadScene(0);
 

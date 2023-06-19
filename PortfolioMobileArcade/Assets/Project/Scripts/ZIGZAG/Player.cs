@@ -27,9 +27,9 @@ public class Player : MonoBehaviour
         GameManager.OnSwitchState -= StartMoving;
     }
 
-    private void StartMoving(GameManager.GameState state)
+    private void StartMoving(GameState state)
     {
-        if (state == GameManager.GameState.InGame) 
+        if (state == GameState.InGame) 
         {
             _moveDirection = Vector3.forward;
         }
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         if(_die) {return;}
-        if (GameManager.Instance.CurrentState != GameManager.GameState.InGame)
+        if (GameManager.Instance.CurrentState != GameState.InGame)
         {
             return;
         }
@@ -64,8 +64,16 @@ public class Player : MonoBehaviour
     {
         if (!Physics.Raycast(transform.position, -Vector3.up, out RaycastHit hit, playerMask))
         {
-            _die = true;
-            GameManager.OnPlayerDied?.Invoke();
+
+            StartCoroutine(WaitToEndGame());
         }
+    }
+
+    private IEnumerator WaitToEndGame()
+    {
+        yield return new WaitForSeconds(1f);
+        _die = true;
+
+        GameManager.OnPlayerDied?.Invoke();
     }
 }
