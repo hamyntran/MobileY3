@@ -8,6 +8,11 @@ public class ObjectPool : SingletonMonoBehaviour<ObjectPool>
 {
    private readonly ComponentPool _componentPool = new();
 
+   public void ClearAllPools()
+   {
+       _componentPool.ClearAllPool();
+   }
+
     public void AddPooled<T>(T originalReference, int count = 1) where T : Component
     {
         _componentPool.AddToPool(originalReference, count);
@@ -42,6 +47,12 @@ public class ComponentPool
 
     //dictionaries of instantied objects and their original object
     private Dictionary<GameObject, GameObject> _originalsByClones = new Dictionary<GameObject, GameObject>();
+
+    public void ClearAllPool()
+    {
+        _pooledComponentsByType.Clear();
+        _originalsByClones.Clear();
+    }
 
     /// <summary>
     /// Add new objects to the pool.

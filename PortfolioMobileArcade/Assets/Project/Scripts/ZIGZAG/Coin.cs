@@ -21,7 +21,7 @@ public class Coin : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            InGameCoin.OnGainedCoin?.Invoke(reward);
+            InGame.OnGainCoinInGame?.Invoke(reward);
             Disappear();
         }
     }

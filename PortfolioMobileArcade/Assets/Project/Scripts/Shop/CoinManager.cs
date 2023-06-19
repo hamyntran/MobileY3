@@ -19,7 +19,7 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
  {
     #region Properties
 
-    public int Coin
+    public static int Coin
     {
         get => PlayerPrefs.GetInt("Coin", 0);
         set
@@ -87,7 +87,7 @@ public class CoinManagerEditorCustom: Editor
         if (GUILayout.Button("Add Coin"))
         {
             _target.AddCoin(10);
-            Debug.Log(_target.Coin);
+            Debug.Log(CoinManager.Coin);
         }
     }
 }
