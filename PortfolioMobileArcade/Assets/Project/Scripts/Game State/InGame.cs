@@ -16,12 +16,14 @@ public class InGame : MonoBehaviour
     {
         CoinGained = 0;
         SetCoinText();
+        
+        gameOverPanel.SetActive(false);
     }
 
     private void OnEnable()
     {
         OnGainCoinInGame += AddCoinAmount;
-        GameManager.OnPlayerDied += () => {  };
+        GameManager.OnPlayerDied +=EnableGameOverPanel;
     }
 
     private void EnableGameOverPanel()
@@ -32,7 +34,7 @@ public class InGame : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.OnPlayerDied -= () => { gameOverPanel.SetActive(true); };
+        GameManager.OnPlayerDied -=EnableGameOverPanel;
         OnGainCoinInGame -= AddCoinAmount;
     }
 
