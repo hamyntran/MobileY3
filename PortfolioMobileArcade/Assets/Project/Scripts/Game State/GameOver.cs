@@ -38,7 +38,7 @@ public class GameOver : MonoBehaviour
       else
       {
 
-         Debug.Log($"Gained {InGame.CoinGained * 2}");
+//         Debug.Log($"Gained {InGame.CoinGained * 2}");
 
          CoinManager.GainCoin?.Invoke(InGame.CoinGained * 2);
       }
@@ -49,7 +49,5 @@ public class GameOver : MonoBehaviour
       GameManager.OnSwitchState?.Invoke(GameState.Begin);
       ObjectPool.Instance.ClearAllPools();
       SceneManager.LoadScene(0);
-      Debug.Log("loaff");
-
    }
 }

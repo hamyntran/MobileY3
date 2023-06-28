@@ -2,12 +2,16 @@
 using UnityEngine;
 using System;
 
-public class SaveTimeData : MonoBehaviour
+public class SaveTimeData : SingletonDontDestroy<SaveTimeData>
 {
     // private DateTime 
     private string _lastTimeExit
     {
-        get => PlayerPrefs.GetString("LastTimeExit", "2023-06-11T14:30:00Z");
+        get
+        {
+            var test = DateTime.UtcNow.AddDays(-1);
+         return PlayerPrefs.GetString("LastTimeExit", test.ToString());
+        }
         set { PlayerPrefs.SetString("LastTimeExit", value); }
     }
 
@@ -25,12 +29,10 @@ public class SaveTimeData : MonoBehaviour
     private void Start()
     {
         DateTime lastExitTime = DateTime.Parse(_lastTimeExit);
-        ////////////////////////Test
+        /*////////////////////////Test
         var test = lastExitTime.AddDays(-1);
-        lastExitTime = test;
+        lastExitTime = test;*/
         TimeSpan timeSinceLastExit = DateTime.UtcNow - lastExitTime;
-
-
         if (timeSinceLastExit.Days == 1)
         {
             PassedOneDay();
@@ -41,7 +43,6 @@ public class SaveTimeData : MonoBehaviour
         }
 
 //        Debug.Log($"{DateTime.UtcNow}. Last login is {timeSinceLastExit.Days} ago. Daily Day: {DailyStrike}");
-        
     }
 
     private void PassedOneDay()
@@ -56,7 +57,7 @@ public class SaveTimeData : MonoBehaviour
         var test = lastExitTime.AddDays(-1);
         lastExitTime = test;
         TimeSpan timeSinceLastExit = DateTime.UtcNow - lastExitTime;
-        
+
         if (timeSinceLastExit.Days == 1)
         {
             PassedOneDay();
@@ -71,7 +72,7 @@ public class SaveTimeData : MonoBehaviour
 
 
 #if UNITY_EDITOR
-    
+
 
     [CustomEditor(typeof(SaveTimeData))]
     public class SaveTimeDataCustomer : Editor
@@ -89,12 +90,12 @@ public class SaveTimeData : MonoBehaviour
             {
                 control.Test();
             }
-            
+
             if (GUILayout.Button("Reset Daily stroke"))
             {
-                SaveTimeData.DailyStrike=0;
+                SaveTimeData.DailyStrike = 0;
             }
-            
+
             if (GUILayout.Button("Add daily strike"))
             {
                 SaveTimeData.DailyStrike++;

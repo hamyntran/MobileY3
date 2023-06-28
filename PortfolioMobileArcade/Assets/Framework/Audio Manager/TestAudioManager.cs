@@ -48,16 +48,18 @@ public class TestAudioManager : MonoBehaviour
     #endregion
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(TestAudioManager))]
 public class TestAudioManagerEditorCustom: Editor
- {
-     public override void OnInspectorGUI()
-     {
-        TestAudioManager _target = (TestAudioManager)target;
-        DrawDefaultInspector();
+{
+	public override void OnInspectorGUI()
+	{
+		TestAudioManager _target = (TestAudioManager)target;
+		DrawDefaultInspector();
 
-        if (GUILayout.Button("Test Sound Effect"))
-        {
-        }
-     }
+		if (GUILayout.Button("Test Sound Effect"))
+		{
+		}
+	}
 }
+#endif

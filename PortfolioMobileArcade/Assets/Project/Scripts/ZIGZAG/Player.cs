@@ -58,16 +58,30 @@ public class Player : MonoBehaviour
 
         transform.Translate(_moveDirection * movementSpeed * Time.deltaTime);
 
-        CheckFailling();
+      //  CheckFailling();
     }
 
     private void CheckFailling()
     {
         if (!Physics.Raycast(transform.position, -Vector3.up, out RaycastHit hit, playerMask))
         {
-
             StartCoroutine(WaitToEndGame());
         }
+    }
+
+    private int collisionCount = 0;
+    private void OnCollisionExit(Collision other)
+    {
+        collisionCount--;
+        if (collisionCount == 0)
+        {
+            StartCoroutine(WaitToEndGame());
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        collisionCount++;
     }
 
     private IEnumerator WaitToEndGame()

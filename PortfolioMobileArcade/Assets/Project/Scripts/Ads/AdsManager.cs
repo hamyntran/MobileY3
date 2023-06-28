@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
-using UnityEditor.Advertisements;
-using UnityEngine.Serialization;
 
 public class AdsManager : SingletonMonoBehaviour<AdsManager>, IUnityAdsInitializationListener, IUnityAdsLoadListener,
     IUnityAdsShowListener

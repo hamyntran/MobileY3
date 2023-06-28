@@ -63,6 +63,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
  }
 
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(AudioManager))]
 public class AudioManagerEditorCustom: Editor
 {
@@ -79,3 +80,4 @@ public class AudioManagerEditorCustom: Editor
 		}
 	}
 }
+#endif

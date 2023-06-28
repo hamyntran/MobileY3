@@ -75,7 +75,6 @@ public class ShopItemSlot : MonoBehaviour
 
                     break;
 
-
                 default:
                     buyButton.SetActive(false);
                     useButton.SetActive(false);

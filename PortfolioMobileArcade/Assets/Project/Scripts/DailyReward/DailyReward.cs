@@ -18,6 +18,7 @@ public class DailyReward : MonoBehaviour
 
     private void Awake()
     {
+        dailyRewardPanel.SetActive(false);
         allRewardDatas = DataManager.Instance.DailyRewardData.AllRewards;
         
         var orderedData = allRewardDatas.OrderBy(data => data.DayNo);

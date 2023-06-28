@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -29,6 +30,11 @@ public class ShopData : MonoBehaviour
     public ShopItemData GetShopItem(int id)
     {
         return shopItemDatas[id];
+    }
+    
+    public ShopItemData GetShopItem(string name)
+    {
+        return shopItemDatas.Where(x=>x.ItemName == name).FirstOrDefault();
     }
     
     #endregion

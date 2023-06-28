@@ -24,7 +24,7 @@ public class ShopSaveData : MonoBehaviour
         }
     }
 
-    private string UsingCharacter
+    public string UsingCharacter
     {
         get => PlayerPrefs.GetString("UsingCharacter", "");
         set { PlayerPrefs.SetString("UsingCharacter", value); }
@@ -37,7 +37,6 @@ public class ShopSaveData : MonoBehaviour
     }
 
     public static Dictionary<CATEGORY, ShopItemSlot> previousItemsSlot = new Dictionary<CATEGORY, ShopItemSlot>();
-
 
     //Debug Purpose
     [SerializeField] private List<ItemStatus> ItemStatusList = new List<ItemStatus>();
@@ -57,15 +56,8 @@ public class ShopSaveData : MonoBehaviour
     {
         Shop.OnItemBought -= UpdateStatus;
         Shop.OnItemUse -= UpdateStatus;
-
     }
 
-    private ShopItemData GetItemByString(string usingString)
-    {
-        string[] x = "Variable1/Variable2".Split('/');
-
-        return allItems.Where(n => n.ItemName == x[0]).FirstOrDefault();
-    }
 
     List<ShopItemData> allItems => DataManager.Instance.ShopData.ShopItemDatas;
 
@@ -75,33 +67,29 @@ public class ShopSaveData : MonoBehaviour
 
         UsingBG = "";
         UsingCharacter = "";
-        
+
         foreach (var item in allItems)
         {
             if (item.Price != 0)
             {
-                PlayerPrefs.SetString($"{item.ItemName}/{item.Price}", "new"); 
+                PlayerPrefs.SetString($"{item.ItemName}/{item.Price}", "new");
 #if UNITY_EDITOR
                 ItemStatusList.Add(new ItemStatus(item, false));
-#endif//Set PlayerPref
-
+#endif //Set PlayerPref
             }
             else
             {
                 UpdateStatus(item);
-                
+
 #if UNITY_EDITOR
                 ItemStatusList.Add(new ItemStatus(item, true));
 #endif
             }
-
-
-
         }
-        
+
         CreatedItemStatus = "true";
-        Debug.Log(
-            $"Created item data status. Created {allItems.Count}/{DataManager.Instance.ShopData.ShopItemDatas.Count}");
+        /*Debug.Log(
+            $"Created item data status. Created {allItems.Count}/{DataManager.Instance.ShopData.ShopItemDatas.Count}");*/
     }
 
     public void UpdateDebug()
@@ -139,6 +127,8 @@ public class ShopSaveData : MonoBehaviour
 
         //UpdateDebug();
     }
+    
+    
 }
 
 
@@ -162,6 +152,8 @@ public class ItemStatus
     }
 }
 
+#if UNITY_EDITOR
+
 [CustomEditor(typeof(ShopSaveData))]
 public class CoinShopSaveData : Editor
 {
@@ -181,3 +173,4 @@ public class CoinShopSaveData : Editor
         }
     }
 }
+#endif
