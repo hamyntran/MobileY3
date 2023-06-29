@@ -50,13 +50,7 @@ public class Shop : MonoBehaviour
             OnChangeCategory?.Invoke((CATEGORY)enumID);
         }
     }
-
-    private void Start()
-    {
-        
-        
-    }
-
+    
     private void OnEnable()
     {
         OnChangeCategory += ChangeCategoryTitleText;

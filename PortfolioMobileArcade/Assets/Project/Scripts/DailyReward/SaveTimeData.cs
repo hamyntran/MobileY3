@@ -29,9 +29,6 @@ public class SaveTimeData : SingletonDontDestroy<SaveTimeData>
     private void Start()
     {
         DateTime lastExitTime = DateTime.Parse(_lastTimeExit);
-        /*////////////////////////Test
-        var test = lastExitTime.AddDays(-1);
-        lastExitTime = test;*/
         TimeSpan timeSinceLastExit = DateTime.UtcNow - lastExitTime;
         if (timeSinceLastExit.Days == 1)
         {

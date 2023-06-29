@@ -17,7 +17,7 @@ public class ShopSaveData : MonoBehaviour
             {
                 PlayerPrefs.SetString("CreatedItemStatus", "false");
             }
-            else
+            else if(value == "true" || value == "True")
             {
                 PlayerPrefs.SetString("CreatedItemStatus", "true");
             }

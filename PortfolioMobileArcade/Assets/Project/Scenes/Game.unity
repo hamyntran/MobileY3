@@ -1960,7 +1960,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8c8b617ffca8f6344838641336c76992, type: 2}
+      objectReference: {fileID: 2100000, guid: 3b33356ac84070640a05b1b679f35de1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 433bb73e03dd11847afd5a3396b23cda, type: 3}
 --- !u!1 &418519206 stripped
@@ -4189,7 +4189,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8c8b617ffca8f6344838641336c76992, type: 2}
+  - {fileID: 2100000, guid: 3b33356ac84070640a05b1b679f35de1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5227,31 +5227,31 @@ MonoBehaviour:
       ItemName: Lisa
       Price: 45
     Name: Lisa
-    Bought: False
+    Bought: bought
   - ItemData:
       Category: 1
       ItemName: Tom
       Price: 0
     Name: Tom
-    Bought: True
+    Bought: using
   - ItemData:
       Category: 2
       ItemName: Dreamy BG
       Price: 0
     Name: Dreamy BG
-    Bought: True
+    Bought: bought
   - ItemData:
       Category: 2
       ItemName: Blue Ocean BG
       Price: 12
     Name: Blue Ocean BG
-    Bought: False
+    Bought: bought
   - ItemData:
       Category: 2
       ItemName: Loyal BG
       Price: 25
     Name: Loyal BG
-    Bought: False
+    Bought: using
 --- !u!1 &1279731552
 GameObject:
   m_ObjectHideFlags: 0
@@ -6830,6 +6830,7 @@ GameObject:
   - component: {fileID: 1666388510}
   - component: {fileID: 1666388512}
   - component: {fileID: 1666388513}
+  - component: {fileID: 1666388514}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -6914,6 +6915,102 @@ MonoBehaviour:
   _skins:
   - {fileID: 2054577993}
   - {fileID: 1500846090}
+--- !u!82 &1666388514
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666388508}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1719903785
 GameObject:
   m_ObjectHideFlags: 0
